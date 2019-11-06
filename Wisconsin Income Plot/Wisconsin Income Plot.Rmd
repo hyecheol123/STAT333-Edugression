@@ -20,12 +20,11 @@ rm(list = ls())
 
 ```{r load_Data}
 
-library(tinyverse) ## To clean up data much easier
+library(tidyverse) ## To clean up data much easier
 
 # Read CSV data
-WI_Income <- read.csv("2017_Wisconsin_QCEW_AnnualAverage_Total.csv")
-
-head(WI_Income)
+All_Income <- read.csv("2017_All_County_QCEW_AnnualAverage_Total.csv")
+head(All_Income)
 
 ```
 
