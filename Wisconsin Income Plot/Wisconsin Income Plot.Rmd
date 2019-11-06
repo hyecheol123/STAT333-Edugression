@@ -9,16 +9,18 @@ rm(list = ls())
 ```
 
 ## Authors
+
 **TODO**: Write Down Authors' Full Name and Email Address
 
 
 ## Introduction
+
 **TODO**: Write down brief explanation what we are trying to plot, why it is useful, reason why we are narrowing down to the Wisconsin's Data. Include our topic.
 
 
 ## Data
 
-```{r load_Data}
+```{r loadData}
 
 library(tidyverse) ## To clean up data much easier
 
@@ -29,6 +31,25 @@ head(All_Income)
 ```
 
 **TODO**: What does this data for? How it looks like? Include the meaning of each column, we need to seelct some.
+
+
+## Select Wisconsin's Data
+
+```{r selectWisconsin}
+
+## Retrieve Index of row containing Wisconsin's data
+WI_Index <- which(substr(All_Income$area_fips, 1, 2) == "55")
+## Filter Wisconsin's Data
+WI_Income <- All_Income[WI_Index, ]
+
+## Clean useless data and values
+rm(WI_Index, All_Income)
+
+```
+
+First two digit of FIPS code indicates each state
+**TODO**: Some description
+Reference: https://www.nrcs.usda.gov/wps/portal/nrcs/detail/?cid=nrcs143_013696
 
 
 ## Select Column for Plotting
