@@ -52,7 +52,32 @@ First two digit of FIPS code indicates each state
 Reference: https://www.nrcs.usda.gov/wps/portal/nrcs/detail/?cid=nrcs143_013696
 
 
-## Select Column for Plotting
+## Select Data for Plotting
+
+```{r selectDataForPlotting}
+
+# Filtering Rows in order to see the total incomes of each counties of Wisconsin
+WI_Total_Income_Index <- which(WI_Income$own_code == 0)
+WI_Total_Income <- WI_Income[WI_Total_Income_Index, ]
+# Clearing useless data
+rm(WI_Income, WI_Total_Income_Index)
+
+# Remove 2 extra rows in the WI_Total_Income
+# Wisconsin has 72 counties, but it contains 74 rows
+notCountyFIPS <- which(WI_Total_Income$area_fips == "55000" | ## For WI cummulated
+                         WI_Total_Income$area_fips == "55999" ## For WI Unknowns
+                       )
+WI_Total_Income <- WI_Total_Income[-notCountyFIPS, ]
+# Clearing useless data
+rm(notCountyFIPS)
+
+
+# Filter columns for plotting
+
+```
+
+Reference: https://data.bls.gov/cew/doc/titles/ownership/ownership_titles.htm
+Reference: https://en.wikipedia.org/wiki/List_of_counties_in_Wisconsin
 
 
 ## Making Plot
