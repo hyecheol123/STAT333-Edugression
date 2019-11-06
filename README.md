@@ -1,7 +1,10 @@
 # STAT333-Edugression
-The repository for STAT 333 Project. How does economic status affect education in Wisconsin?
+The repository for STAT 333 Project.  
+Topic: How does economic status affect education in Wisconsin?  
 
-We want to analyze this by looking at the relationships between many variables used to represent education and economic status. We plan to look at education variables such as average ACT score, average GPA, high school graduation and dropout rates, and availability of college-level classes in high school. For economic data, we want to look at mean income, total wage, tax revenue, and GDP.
+We want to analyze this by looking at the relationships between many variables used to represent education and economic status.  
+We plan to look at education performance variables such as average ACT score, average GPA, high school graduation and dropout rates, and availability of college-level classes in high school.  
+For economic data, we want to look at mean income, total wage, tax revenue, and GDP.  
 
 ## List of Contents
 1. Homework 7 - **Wisconsin Income Plot**  
