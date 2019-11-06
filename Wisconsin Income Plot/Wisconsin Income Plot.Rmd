@@ -1,0 +1,38 @@
+---
+title: "Wisconsin Income Plot"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+rm(list = ls())
+```
+
+## Authors
+**TODO**: Write Down Authors' Full Name and Email Address
+
+
+## Introduction
+**TODO**: Write down brief explanation what we are trying to plot, why it is useful, reason why we are narrowing down to the Wisconsin's Data. Include our topic.
+
+
+## Data
+
+```{r load_Data}
+
+library(tinyverse) ## To clean up data much easier
+
+# Read CSV data
+WI_Income <- read.csv("2017_Wisconsin_QCEW_AnnualAverage_Total.csv")
+
+head(WI_Income)
+
+```
+
+**TODO**: What does this data for? How it looks like? Include the meaning of each column, we need to seelct some.
+
+
+## Select Column for Plotting
+
+
+## Making Plot
