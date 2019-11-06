@@ -72,12 +72,25 @@ WI_Total_Income <- WI_Total_Income[-notCountyFIPS, ]
 rm(notCountyFIPS)
 
 
-# Filter columns for plotting
+# Filter meaningful columns
+WI_Total_Income <- as_tibble(
+  list(
+    countyFIPS = WI_Total_Income$area_fips, ## FIPS code to indicate each county
+    annualAvgQuarterlyEstablishments = WI_Total_Income$annual_avg_estabs,
+    annualAvgEmployments = WI_Total_Income$annual_avg_emplvl,
+    totalAnnualWage = WI_Total_Income$total_annual_wages, ## Total wages (Income)
+    ## Taxable income and contribution will follow the tendency of total annual wages
+    averageWeeklyWage = WI_Total_Income$annual_avg_wkly_wage,
+    annualWagesPerEmployee = WI_Total_Income$avg_annual_pay
+  )
+)
 
 ```
 
 Reference: https://data.bls.gov/cew/doc/titles/ownership/ownership_titles.htm
 Reference: https://en.wikipedia.org/wiki/List_of_counties_in_Wisconsin
+Reference: http://www.dlt.ri.gov/lmi/faq/employment.htm
+
 
 
 ## Making Plot
