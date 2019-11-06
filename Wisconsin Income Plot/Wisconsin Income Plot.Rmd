@@ -75,7 +75,7 @@ rm(notCountyFIPS)
 # Filter meaningful columns
 WI_Total_Income <- as_tibble(
   list(
-    countyFIPS = WI_Total_Income$area_fips, ## FIPS code to indicate each county
+    countyFIPS = as.numeric(as.character(WI_Total_Income$area_fips)), ## FIPS code to indicate each county
     annualAvgQuarterlyEstablishments = WI_Total_Income$annual_avg_estabs,
     annualAvgEmployments = WI_Total_Income$annual_avg_emplvl,
     totalAnnualWage = WI_Total_Income$total_annual_wages, ## Total wages (Income)
@@ -85,12 +85,60 @@ WI_Total_Income <- as_tibble(
   )
 )
 
+
+
 ```
 
+**TODO** Write down some description what and why we are doing here.
 Reference: https://data.bls.gov/cew/doc/titles/ownership/ownership_titles.htm
 Reference: https://en.wikipedia.org/wiki/List_of_counties_in_Wisconsin
 Reference: http://www.dlt.ri.gov/lmi/faq/employment.htm
 
 
-
 ## Making Plot
+
+```{r plot, fig.height = 20, fig.asp = 1, fig.align = "center"}
+
+library(choroplethr)
+
+## Plotting for totalAnnualWage of each county
+### Need to make separated dataframe
+### region = countyFIPS
+### value = totalAnnualWage
+df <- as_tibble(
+  list(
+    region = WI_Total_Income$countyFIPS,
+    value = WI_Total_Income$totalAnnualWage
+  )
+)
+county_choropleth(df, state_zoom="wisconsin",
+                  title = "2017 Total Annual Wage of counties in the Wisconsin",
+                  legend = "Total Annual Wage (USD)",
+                  num_colors = 1)
+
+## Plotting for annualAveragePerEmployee of each county
+### Need to make separated dataframe
+### region = countyFIPS
+### value = annualAveragePerEmployee
+df <- as_tibble(
+  list(
+    region = WI_Total_Income$countyFIPS,
+    value = WI_Total_Income$annualWagesPerEmployee
+  )
+)
+county_choropleth(df, state_zoom="wisconsin",
+                  title = "2017 Annual Wage per Employee of counties in the Wisconsin",
+                  legend = "Annual Wages Per Employee (USD)",
+                  num_colors = 1)
+
+## clearing useless data
+rm(df)
+
+```
+
+**TODO**: Write down some description what we are trying to show
+
+
+## Discussion Topics/Questions
+
+**TODO**: Make some questions that we might need to get answers from in-class discussion
