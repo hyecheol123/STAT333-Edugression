@@ -10,7 +10,11 @@ rm(list = ls())
 
 ## Authors
 
-**TODO**: Write Down Authors' Full Name and Email Address
+- **Hyecheol (Jerry) Jang**: hyecheol.jang@wisc.edu
+- **Carleigh Heintz**: cmheintz@wisc.edu
+- **Chang Su**: csu29@wisc.edu
+- **Desmond Fung**: dfung2@wisc.edu
+- **Tsz Yau Iris Chow**: tchow7@wisc.edu
 
 
 ## Introduction
@@ -84,8 +88,6 @@ WI_Total_Income <- as_tibble(
     annualWagesPerEmployee = WI_Total_Income$avg_annual_pay
   )
 )
-
-
 
 ```
 
