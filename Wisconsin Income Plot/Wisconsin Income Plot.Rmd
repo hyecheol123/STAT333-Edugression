@@ -144,7 +144,7 @@ rm(df)
 
 ```
 
-**TODO**: Write down some description what we are trying to show
+We are trying to show the income distribution throughout the state to be used later to compare to our education variables which have not yet been analyzed.
 
 
 ## Discussion Topics/Questions
