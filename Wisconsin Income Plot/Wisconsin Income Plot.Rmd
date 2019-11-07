@@ -149,3 +149,6 @@ We are trying to show the income distribution throughout the state to be used la
 ## Discussion Topics/Questions
 
 **TODO**: Make some questions that we might need to get answers from in-class discussion
+1. Between **"Annual Wage per Employee"** vs **"Total Wage of County"**, ***what shows the economic status of each county more clearly?***  
+2. For some Econ majors in classroom, what is the difference between **"Establishment counts"** and **"Employee counts"**? Is there anyone who can help us understanding those two concepts?   
+3. Do you think it is enough ***just for focusing on the Wisconsin's data?*** Or should we ***extend our target area?***   
