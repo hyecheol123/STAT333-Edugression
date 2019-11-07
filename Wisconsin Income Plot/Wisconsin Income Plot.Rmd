@@ -143,7 +143,7 @@ rm(df)
 
 ```
 
-We are trying to show the income distribution throughout the state to be used later to compare to our education variables which have not yet been analyzed.
+We are trying to show the income distribution throughout the state to be used later to compare to our education variables which have not yet been analyzed.  
 
 
 ## Discussion Topics/Questions
