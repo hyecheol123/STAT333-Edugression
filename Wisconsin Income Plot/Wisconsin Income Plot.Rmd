@@ -93,7 +93,6 @@ WI_Total_Income <- as_tibble(
 
 ```
 
-**TODO** Write down some description what and why we are doing here.
 The ownership code 0 indicates the total income across all companies regardless of its owner (whether they are private, federal, or the others). By selecting the rows with ownership code 0, we can see the total wages earned by each county.  
 The FIPS Code of 55000 and 55999 does not indicate actual counties in the Wisconsin. Code 55000 indicates the sum of data for all counties in Wisconsin (indicating Wisconsin's state total). Code 55999 indicates the companies that the location is unknown. Deleting these two data let us compare the difference between each county.  
 The raw data contains column of disclaimers tags and columns to indicate time period, scales, ratio, and so on. As all of the scale data was identical across all county, we already know the time period of our data, and we only focusing on the figures, not the ratio of change, we decided to remove those column.  
