@@ -23,6 +23,8 @@ We are trying to analyze the relationship between economic status and education 
 
 To begin analyzing the relationship between these two things, we started by making a graph of annual wage per employee for each county in Wisconsin. This can be used gauge which citizens within the counties of the state are making more money compared to others, we are using this as a proxy variable for economic status.  
 
+We expected that county with higher wages would have higher ACT scores, partially because people with higher education tend to earn higher wages. We also expected that wage per employee, GDP, and mean income would be strongly correlated with the average ACT scores in the county.  
+
 
 ## Data
 
