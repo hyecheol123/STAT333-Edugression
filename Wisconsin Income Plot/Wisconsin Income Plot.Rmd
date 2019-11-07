@@ -15,8 +15,9 @@ rm(list = ls())
 
 ## Introduction
 
-**TODO**: Write down brief explanation what we are trying to plot, why it is useful, reason why we are narrowing down to the Wisconsin's Data. Include our topic.
+We are trying to analyze the relationship between economic status and education in Wisconsin. To do this, we are focusing on high school data for Wisconsin, and using proxy variables in each county such as average ACT Score, average GPA, and high school graduation rate. For the economic status data, we are analyzing the variables mean income, annual wage per employee, GDP for a county, and tax revenue. Because education is generally left up the states, the education data in the United States is very divided. Because of this, we decided to focus only on Wisconsin to analyze this relationship because it would not be very time efficient to have to combine 50 different data sets into one. 
 
+To begin analyzing the relationship between these two things, we started by making a graph of annual wage per employee for each county in Wisconsin. This can be used gauge which citizens within the counties of the state are making more money compared to others, we are using this as a proxy variable for economic status. 
 
 ## Data
 
