@@ -38,6 +38,7 @@ head(All_Income)
 
 **TODO**: What does this data for? How it looks like? Include the meaning of each column, we need to seelct some.
 
+The data set is for measuring the economic well-being of the students of taking standardised tests. It is categorised by FIPS code. The data set includes employment level, wages and they are divided up into different points of the year.
 
 ## Select Wisconsin's Data
 
