@@ -51,8 +51,8 @@ rm(WI_Index, All_Income)
 
 ```
 
-First two digit of FIPS code indicates each state
-**TODO**: Some description
+First two digit of FIPS code indicates each state. The Wisconsin's FIPS code is 55, so the rows with FIPS code starts with "55" indicates data of counties on the Wisconsin.  
+
 Reference: https://www.nrcs.usda.gov/wps/portal/nrcs/detail/?cid=nrcs143_013696
 
 
