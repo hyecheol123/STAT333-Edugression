@@ -38,7 +38,7 @@ head(All_Income)
 
 ```
 
-The data set is for measuring the economic well-being of the students of taking standardised tests. It is categorised by FIPS code. The data set includes employment level, wages and they are divided up into different points of the year.
+The data set is for measuring **the economic well-being of all counties in the United States**. It is categorised by FIPS code. The data set includes employment level, wages and some other data. All the data indicates year 2017's average or sum.
 
 
 ## Select Wisconsin's Data
