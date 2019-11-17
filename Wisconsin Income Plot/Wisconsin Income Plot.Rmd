@@ -23,6 +23,8 @@ We are trying to analyze the relationship between economic status and education 
 
 To begin analyzing the relationship between these two things, we started by making a graph of annual wage per employee for each county in Wisconsin. This can be used gauge which citizens within the counties of the state are making more money compared to others, we are using this as a proxy variable for economic status.  
 
+We expected that county with higher wages would have higher ACT scores, partially because people with higher education tend to earn higher wages. We also expected that wage per employee, GDP, and mean income would be strongly correlated with the average ACT scores in the county.  
+
 
 ## Data
 
@@ -40,7 +42,7 @@ ACT_data <- read.csv("ACT Data 2017-18 - Sheet1.csv")
 
 ```
 
-The data set is for measuring the economic well-being of the students of taking standardised tests. It is categorised by FIPS code. The data set includes employment level, wages and they are divided up into different points of the year.
+The data set is for measuring **the economic well-being of all counties in the United States**. It is categorised by FIPS code. The data set includes employment level, wages and some other data. All the data indicates year 2017's average or sum.
 
 
 ## Select Wisconsin's Data
@@ -152,7 +154,6 @@ We are trying to show the income distribution throughout the state to be used la
 
 ## Discussion Topics/Questions
 
-**TODO**: Make some questions that we might need to get answers from in-class discussion
 1. Between **"Annual Wage per Employee"** vs **"Total Wage of County"**, ***what shows the economic status of each county more clearly?***  
 2. For some Econ majors in classroom, what is the difference between **"Establishment counts"** and **"Employee counts"**? Is there anyone who can help us understanding those two concepts?   
 3. Do you think it is enough ***just for focusing on the Wisconsin's data?*** Or should we ***extend our target area?***   
