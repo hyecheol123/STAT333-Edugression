@@ -56,6 +56,16 @@ plot(income.act$ACT, income.act$Mean.income, xlab="ACT score", ylab="Mean income
 abline(lm(income.act$Mean.income ~ income.act$ACT), col = "red")
 ```
 
+```{r}
+# install.packages("devtools")
+# library(devtools)
+# install_github('arilamstein/choroplethrZip@v1.4.0')
+df <- data.frame("region"=1:514)
+df$region = ACT_data$zipcode
+df$data = ACT_data$ACT
+zip_choropleth(df, state_zoom="wisconsin")
+```
+
 
 The data set is for measuring the economic well-being of the students of taking standardised tests. It is categorised by FIPS code. The data set includes employment level, wages and they are divided up into different points of the year.
 
