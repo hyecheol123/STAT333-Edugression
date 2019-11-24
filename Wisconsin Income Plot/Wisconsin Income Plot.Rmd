@@ -23,51 +23,22 @@ We are trying to analyze the relationship between economic status and education 
 
 To begin analyzing the relationship between these two things, we started by making a graph of annual wage per employee for each county in Wisconsin. This can be used gauge which citizens within the counties of the state are making more money compared to others, we are using this as a proxy variable for economic status.  
 
+We expected that county with higher wages would have higher ACT scores, partially because people with higher education tend to earn higher wages. We also expected that wage per employee, GDP, and mean income would be strongly correlated with the average ACT scores in the county.  
+
 
 ## Data
 
 ```{r loadData}
 
 library(tidyverse) ## To clean up data much easier
-setwd("/Users/carleighheintz/Edugression/Wisconsin Income Plot")
 
 # Read CSV data
 All_Income <- read.csv("2017_All_County_QCEW_AnnualAverage_Total.csv")
 head(All_Income)
 
-setwd("/Users/carleighheintz/Edugression/Manipulated Data")
-
-Mean_Income <- read.csv("mean_income.csv")
-
-ACT_data <- read.csv("ACT Data 2017-18.csv")
-colnames(ACT_data)[3] <- "zipcode"
-
-income.act <- merge(Mean_Income, ACT_data)
-income.act$Mean.income <- as.numeric(as.character(income.act$Mean.income))
-head(income.act)
-
 ```
 
-## Data Analysis
-```{r}
-lm.incomeact <- lm(income.act$Mean.income ~ income.act$ACT)
-summary(lm.incomeact)
-plot(income.act$ACT, income.act$Mean.income, xlab="ACT score", ylab="Mean income")
-abline(lm(income.act$Mean.income ~ income.act$ACT), col = "red")
-```
-
-```{r}
-# install.packages("devtools")
-# library(devtools)
-# install_github('arilamstein/choroplethrZip@v1.4.0')
-df <- data.frame("region"=1:514)
-df$region = ACT_data$zipcode
-df$data = ACT_data$ACT
-zip_choropleth(df, state_zoom="wisconsin")
-```
-
-
-The data set is for measuring the economic well-being of the students of taking standardised tests. It is categorised by FIPS code. The data set includes employment level, wages and they are divided up into different points of the year.
+The data set is for measuring **the economic well-being of all counties in the United States**. It is categorised by FIPS code. The data set includes employment level, wages and some other data. All the data indicates year 2017's average or sum.
 
 
 ## Select Wisconsin's Data
@@ -179,7 +150,6 @@ We are trying to show the income distribution throughout the state to be used la
 
 ## Discussion Topics/Questions
 
-**TODO**: Make some questions that we might need to get answers from in-class discussion
 1. Between **"Annual Wage per Employee"** vs **"Total Wage of County"**, ***what shows the economic status of each county more clearly?***  
 2. For some Econ majors in classroom, what is the difference between **"Establishment counts"** and **"Employee counts"**? Is there anyone who can help us understanding those two concepts?   
 3. Do you think it is enough ***just for focusing on the Wisconsin's data?*** Or should we ***extend our target area?***   
