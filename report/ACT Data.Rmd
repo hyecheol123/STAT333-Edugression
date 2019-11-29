@@ -1,0 +1,44 @@
+---
+title: "ACT Data"
+author: "Carleigh Heintz"
+date: "11/28/2019"
+output: html_document
+---
+
+---
+title: "Wisconsin Income Plot"
+output: html_document
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+rm(list = ls())
+```
+
+
+```{r loadData}
+# need to change working directory based on your computer... couldnt figure out how to generalize this
+setwd("/Users/carleighheintz/Edugression/Manipulated Data")
+Mean_Income <- read.csv("mean_income.csv") # mean income data
+ACT_data <- read.csv("ACT Data 2017-18.csv") # ACT Data
+colnames(ACT_data)[3] <- "zipcode" #changing name ... optional
+income.act <- merge(Mean_Income, ACT_data) #combining two data sets based on zipcode
+income.act$Mean.income <- as.numeric(as.character(income.act$Mean.income)) #converting from factor to numeric
+head(income.act)
+```
+## Data Analysis
+```{r}
+lm.incomeact <- lm(income.act$Mean.income ~ income.act$ACT)
+summary(lm.incomeact)
+plot(income.act$ACT, income.act$Mean.income, xlab="ACT score", ylab="Mean income")
+abline(lm(income.act$Mean.income ~ income.act$ACT), col = "red")
+```
+
+```{r}
+# install.packages("devtools") # run these if you dont have it installed
+# library(devtools)
+# install_github('arilamstein/choroplethrZip@v1.4.0')
+df <- data.frame("region"=1:514) # empty data frame
+df$region = ACT_data$zipcode # need names "region" and "data" for zip_chloropleth function
+df$data = ACT_data$ACT
+zip_choropleth(df, state_zoom="wisconsin")
+```
