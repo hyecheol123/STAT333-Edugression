@@ -17,7 +17,7 @@ rm(list = ls())
 
 ```{r loadData}
 # need to change working directory based on your computer... couldnt figure out how to generalize this
-setwd("/Users/carleighheintz/Edugression/Manipulated Data")
+setwd("../../Manipulated Data")
 Mean_Income <- read.csv("mean_income.csv") # mean income data
 ACT_data <- read.csv("ACT Data 2017-18.csv") # ACT Data
 colnames(ACT_data)[3] <- "zipcode" #changing name ... optional
@@ -25,6 +25,7 @@ income.act <- merge(Mean_Income, ACT_data) #combining two data sets based on zip
 income.act$Mean.income <- as.numeric(as.character(income.act$Mean.income)) #converting from factor to numeric
 head(income.act)
 ```
+
 ## Data Analysis
 ```{r}
 lm.incomeact <- lm(income.act$Mean.income ~ income.act$ACT)
