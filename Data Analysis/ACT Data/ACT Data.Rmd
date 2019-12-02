@@ -20,8 +20,11 @@ rm(list = ls())
 setwd("../../Manipulated Data")
 Mean_Income <- read.csv("mean_income.csv") # mean income data
 ACT_data <- read.csv("ACT Data 2017-18.csv") # ACT Data
+colnames(Mean_Income)[1] <- "zipcode"
 colnames(ACT_data)[3] <- "zipcode" #changing name ... optional
-income.act <- merge(Mean_Income, ACT_data) #combining two data sets based on zipcode
+# combining two data sets based on zipcode
+# All existing data for mean_income and ACT_Data has been merged (Containing NA)
+income.act <- merge(Mean_Income, ACT_data, by = "zipcode", all = TRUE)
 income.act$Mean.income <- as.numeric(as.character(income.act$Mean.income)) #converting from factor to numeric
 head(income.act)
 ```
@@ -30,8 +33,8 @@ head(income.act)
 ```{r}
 lm.incomeact <- lm(income.act$ACT ~ income.act$Mean.income)
 summary(lm.incomeact)
-plot(income.act$ACT, income.act$Mean.income, xlab="Mean income", ylab="ACT Score")
-abline(lm(income.act$Mean.income ~ income.act$ACT), col = "red")
+plot(income.act$Mean.income, income.act$ACT, xlab="Mean income", ylab="ACT Score")
+abline(lm.incomeact, col = "red")
 ```
 
 ```{r}
