@@ -30,19 +30,23 @@ head(income.act)
 ```
 
 ## Data Analysis
-```{r}
+```{r linearRegression}
 lm.incomeact <- lm(income.act$ACT ~ income.act$Mean.income)
 summary(lm.incomeact)
 plot(income.act$Mean.income, income.act$ACT, xlab="Mean income", ylab="ACT Score")
 abline(lm.incomeact, col = "red")
 ```
 
-```{r}
+```{r plottingACT}
+
 # install.packages("devtools") # run these if you dont have it installed
-# library(devtools)
+library(devtools)
 # install_github('arilamstein/choroplethrZip@v1.4.0')
+library(choroplethrZip)
+
 df <- data.frame("region"=1:514) # empty data frame
 df$region = ACT_data$zipcode # need names "region" and "data" for zip_chloropleth function
-df$data = ACT_data$ACT
+df$value = ACT_data$ACT
 zip_choropleth(df, state_zoom="wisconsin")
+
 ```
