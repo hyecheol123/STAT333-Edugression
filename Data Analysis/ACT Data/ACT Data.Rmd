@@ -28,7 +28,7 @@ head(income.act)
 
 ## Data Analysis
 ```{r}
-lm.incomeact <- lm(income.act$Mean.income ~ income.act$ACT)
+lm.incomeact <- lm(income.act$ACT ~ income.act$Mean.income)
 summary(lm.incomeact)
 plot(income.act$ACT, income.act$Mean.income, xlab="ACT score", ylab="Mean income")
 abline(lm(income.act$Mean.income ~ income.act$ACT), col = "red")
