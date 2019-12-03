@@ -1,0 +1,59 @@
+---
+title: "Regression Model"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r loadData}
+ACT_Data <- read.csv("../Manipulated Data/ACT Data 2017-18.csv")
+ACT_Data <- ACT_Data[, -1]
+ACT_Data$zip <- ACT_Data$Zipcode
+ACT_Data <- ACT_Data[, -2]
+GraduationRate <- read.csv("../Manipulated Data/Graduation Rate.csv")
+GraduationRate$GraduationRate <- as.numeric(as.character(GraduationRate$GraduationRate))
+GraduationRate$zip <- GraduationRate$zipcode
+GraduationRate <- GraduationRate[, -1]
+Demographic <- read.csv("../Manipulated Data/Demographic.csv")
+Demographic <- Demographic[, -c(2, 3, 4, 5)]
+Demographic$zip <- Demographic$zip.code
+Demographic <- Demographic[, -1]
+EmployeeEducation <- read.csv("../Manipulated Data/EmployeeEducationData.csv")
+EmployeeEducation$zip <- EmployeeEducation$zip.code
+EmployeeEducation <- EmployeeEducation[, -c(1, 2, 3, 4, 5, 6, 7)]
+MeanIncome <- read.csv("../Manipulated Data/mean_income.csv")
+MeanIncome$Mean.income <- as.numeric(as.character(MeanIncome$Mean.income))
+MeanIncome$zip <- MeanIncome$ï..zipcode
+MeanIncome <- MeanIncome[, -1]
+PrivateSchoolRatio <- read.csv("../Manipulated Data/PublicPrivateSchool.csv")
+PrivateSchoolRatio$Private.Ratio <- as.numeric(as.character(PrivateSchoolRatio$Private.Ratio))
+PrivateSchoolRatio$zip <- PrivateSchoolRatio$Zipcode
+PrivateSchoolRatio <- PrivateSchoolRatio[, -c(1, 2, 3, 4, 5, 6, 7)]
+```
+
+```{r mergeDatasets}
+
+ACT <- merge(Demographic, ACT_Data, by = "zip", all = TRUE)
+ACT <- merge(ACT, EmployeeEducation, by = "zip", all = TRUE)
+ACT <- merge(ACT, MeanIncome, by = "zip", all = TRUE)
+ACT <- merge(ACT, PrivateSchoolRatio, by = "zip", all = TRUE)
+ACT <- ACT[, -1]
+
+Grad <- merge(Demographic, GraduationRate, by = "zip", all = TRUE)
+Grad <- merge(Grad, EmployeeEducation, by = "zip", all = TRUE)
+Grad <- merge(Grad, MeanIncome, by = "zip", all = TRUE)
+Grad <- merge(Grad, PrivateSchoolRatio, by = "zip", all = TRUE)
+Grad <- Grad[, -1]
+
+```
+
+```{r linearRegression}
+lm.fit.ACT <- lm(ACT ~ ., data = ACT)
+summary(lm.fit.ACT)
+
+lm.fit.Grad <- lm(GraduationRate ~ ., data = Grad)
+summary(lm.fit.Grad)
+```
+
