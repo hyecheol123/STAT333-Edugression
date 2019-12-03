@@ -1,0 +1,160 @@
+---
+title: "Wisconsin Income Plot"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+rm(list = ls())
+```
+
+## Authors
+
+- **Hyecheol (Jerry) Jang**: hyecheol.jang@wisc.edu
+- **Carleigh Heintz**: cmheintz@wisc.edu
+- **Chang Su**: csu29@wisc.edu
+- **Desmond Fung**: dfung2@wisc.edu
+- **Tsz Yau Iris Chow**: tchow7@wisc.edu
+
+
+## Introduction
+
+We are trying to analyze the relationship between economic status and education in Wisconsin. To do this, we are focusing on high school data for Wisconsin, and using proxy variables in each county such as average ACT Score, average GPA, and high school graduation rate. For the economic status data, we are analyzing the variables mean income, annual wage per employee, GDP for a county, and tax revenue. Because education is generally left up the states, the education data in the United States is very divided. Because of this, we decided to focus only on Wisconsin to analyze this relationship because it would not be very time efficient to have to combine 50 different data sets into one.  
+
+To begin analyzing the relationship between these two things, we started by making a graph of annual wage per employee for each county in Wisconsin. This can be used gauge which citizens within the counties of the state are making more money compared to others, we are using this as a proxy variable for economic status.  
+
+We expected that county with higher wages would have higher ACT scores, partially because people with higher education tend to earn higher wages. We also expected that wage per employee, GDP, and mean income would be strongly correlated with the average ACT scores in the county.  
+
+
+## Data
+
+```{r loadData}
+
+library(tidyverse) ## To clean up data much easier
+
+# Read CSV data
+All_Income <- read.csv("2017_All_County_QCEW_AnnualAverage_Total.csv")
+head(All_Income)
+
+```
+
+The data set is for measuring **the economic well-being of all counties in the United States**. It is categorised by FIPS code. The data set includes employment level, wages and some other data. All the data indicates year 2017's average or sum.
+
+
+## Select Wisconsin's Data
+
+```{r selectWisconsin}
+
+## Retrieve Index of row containing Wisconsin's data
+WI_Index <- which(substr(All_Income$area_fips, 1, 2) == "55")
+## Filter Wisconsin's Data
+WI_Income <- All_Income[WI_Index, ]
+
+## Clean useless data and values
+rm(WI_Index, All_Income)
+
+```
+
+First two digit of FIPS code indicates each state. The Wisconsin's FIPS code is 55, so the rows with FIPS code starts with "55" indicates data of counties on the Wisconsin.  
+
+Reference: https://www.nrcs.usda.gov/wps/portal/nrcs/detail/?cid=nrcs143_013696  
+
+
+## Select Data for Plotting
+
+```{r selectDataForPlotting}
+
+# Filtering Rows in order to see the total incomes of each counties of Wisconsin
+WI_Total_Income_Index <- which(WI_Income$own_code == 0)
+WI_Total_Income <- WI_Income[WI_Total_Income_Index, ]
+# Clearing useless data
+rm(WI_Income, WI_Total_Income_Index)
+
+# Remove 2 extra rows in the WI_Total_Income
+# Wisconsin has 72 counties, but it contains 74 rows
+notCountyFIPS <- which(WI_Total_Income$area_fips == "55000" | ## For WI cummulated
+                         WI_Total_Income$area_fips == "55999" ## For WI Unknowns
+                       )
+WI_Total_Income <- WI_Total_Income[-notCountyFIPS, ]
+# Clearing useless data
+rm(notCountyFIPS)
+
+
+# Filter meaningful columns
+WI_Total_Income <- as_tibble(
+  list(
+    countyFIPS = as.numeric(as.character(WI_Total_Income$area_fips)), ## FIPS code to indicate each county
+    annualAvgQuarterlyEstablishments = WI_Total_Income$annual_avg_estabs,
+    annualAvgEmployments = WI_Total_Income$annual_avg_emplvl,
+    totalAnnualWage = WI_Total_Income$total_annual_wages, ## Total wages (Income)
+    ## Taxable income and contribution will follow the tendency of total annual wages
+    averageWeeklyWage = WI_Total_Income$annual_avg_wkly_wage,
+    annualWagesPerEmployee = WI_Total_Income$avg_annual_pay
+  )
+)
+
+```
+
+The ownership code 0 indicates the total income across all companies regardless of its owner (whether they are private, federal, or the others). By selecting the rows with ownership code 0, we can see the total wages earned by each county.  
+The FIPS Code of 55000 and 55999 does not indicate actual counties in the Wisconsin. Code 55000 indicates the sum of data for all counties in Wisconsin (indicating Wisconsin's state total). Code 55999 indicates the companies that the location is unknown. Deleting these two data let us compare the difference between each county.  
+The raw data contains column of disclaimers tags and columns to indicate time period, scales, ratio, and so on. As all of the scale data was identical across all county, we already know the time period of our data, and we only focusing on the figures, not the ratio of change, we decided to remove those column.  
+
+Reference: https://data.bls.gov/cew/doc/titles/ownership/ownership_titles.htm  
+Reference: https://en.wikipedia.org/wiki/List_of_counties_in_Wisconsin  
+Reference: http://www.dlt.ri.gov/lmi/faq/employment.htm  
+
+
+## Making Plot
+
+```{r plot, fig.height = 20, fig.asp = 1, fig.align = "center"}
+
+library(choroplethr)
+
+## Plotting for totalAnnualWage of each county
+### Need to make separated dataframe
+### region = countyFIPS
+### value = totalAnnualWage
+df <- as_tibble(
+  list(
+    region = WI_Total_Income$countyFIPS,
+    value = WI_Total_Income$totalAnnualWage
+  )
+)
+county_choropleth(df, state_zoom="wisconsin",
+                  title = "2017 Total Annual Wage of counties in the Wisconsin",
+                  legend = "Total Annual Wage (USD)",
+                  num_colors = 1)
+
+## Plotting for annualAveragePerEmployee of each county
+### Need to make separated dataframe
+### region = countyFIPS
+### value = annualAveragePerEmployee
+df <- as_tibble(
+  list(
+    region = WI_Total_Income$countyFIPS,
+    value = WI_Total_Income$annualWagesPerEmployee
+  )
+)
+county_choropleth(df, state_zoom="wisconsin",
+                  title = "2017 Annual Wage per Employee of counties in the Wisconsin",
+                  legend = "Annual Wages Per Employee (USD)",
+                  num_colors = 1)
+
+## clearing useless data
+rm(df)
+
+```
+
+We are trying to show the income distribution throughout the state to be used later to compare to our education variables which have not yet been analyzed.  
+
+
+## Discussion Topics/Questions
+
+1. Between **"Annual Wage per Employee"** vs **"Total Wage of County"**, ***what shows the economic status of each county more clearly?***  
+2. For some Econ majors in classroom, what is the difference between **"Establishment counts"** and **"Employee counts"**? Is there anyone who can help us understanding those two concepts?   
+3. Do you think it is enough ***just for focusing on the Wisconsin's data?*** Or should we ***extend our target area?***   
+
+
+<hr style = "border-top:1px solid #000">
+
+<h3 style = "text-align: center; margin-bottom: 20px;">End of Assignment</br></h3>
