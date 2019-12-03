@@ -129,13 +129,46 @@ Seeing the plot for Total Annual Wage(Income) of counties in the Wisconsin (Fig.
 Seeing the plot for Annual Wage(Income) per Employee of counties in the Wisconsin (Fig. 2), it can still be concluded that the Madison and Milwaukee area is considered as the economic center of the Wisconsin, but as this plot indicated average employee's income, it is more likely to represent household economic power compare to the previous plot.
 Therefore, for further analysis, we decided to use average income to represent household economic status.
 
-\subsection{Wisconsin Mean Imcome by zipcode}
+\subsection{Wisconsin Mean Income by zip code}
 
-The template is used to format your paper and style the text. All margins, column widths, line spaces, and text fonts are prescribed; please do not alter them. You may note peculiarities. For example, the head margin in this template measures proportionately more than is customary. This measurement and others are deliberate, using specifications that anticipate your paper as one part of the entire proceedings, and not as an independent document. Please do not revise any of the current designations
+To get more specific data, our team decided to use dataset coded by zip code.
+To begin with, we analyzed the mean income for each zip code, which indicates household economic status.
 
-\subsection{ACT Score by zipcode}
+The data has been retrieved from American Community Survey (ACS), and we specifically used year 2017's census data for Mean Income In The Past 12 Months (In 2017 Inflation-Adjusted Dollars) from 2013-2017 American Community Survey 5-Year Estimates (2010, [4]).
+From the cited database, we used \textbf{search criteria} below.
 
-The template is used to format your paper and style the text. All margins, column widths, line spaces, and text fonts are prescribed; please do not alter them. You may note peculiarities. For example, the head margin in this template measures proportionately more than is customary. This measurement and others are deliberate, using specifications that anticipate your paper as one part of the entire proceedings, and not as an independent document. Please do not revise any of the current designations
+\begin{itemize}
+
+\item Table Name: S1902
+\item select 2017 data
+\item Added Geographic after Search: 5-Digit Zip Code Tabulation Area - 860
+\item state: Wisconsin
+\item All 5-Digit Zip Code Tabulation Areas
+
+\end{itemize}
+\vspace{1\baselineskip}
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=1.0\linewidth]{2017_Mean_Income_Zipcode.jpg}
+\end{center}
+\caption{Plot for 2017 Mean Income for each Zip Code in the Wisconsin}
+\label{fig:long}
+\label{fig:onecol}
+\end{figure}
+
+By selecting Mean Income - Estimate for each zip code, we are able to get mean income for each zip code for each area.
+Seeing the plot of wage coded by zip code (Fig. 3), we can still conclude that Madison and MilWaukee area's mean income is still higher than other area.
+However, we are able to intuitively see that there exist outliers in this data, which does not represented in plot clearly.
+
+Looking through the dataset, the area zip code 53047 is the outlier, where its mean income is reaching near 300 thousands.
+Searched online, this zip code is belongs to Lebanon, Wisconsin, of which population is only 1664.
+Concluding from this analysis, among those small number of citizens in Lebanon, on that zip code, very small number of people who earns a lot of money might live there.
+
+
+\subsection{ACT Score by zip code}
+
+
 
 \section{MATH}
 
@@ -272,6 +305,8 @@ References are important to the reader; therefore, each citation must be complet
 
 \bibitem{c3} Data Slices by Industry. (2016, June 21). Retrieved December 2, 2019, from \newline
 https://data.bls.gov/cew/doc/access/csv\_data\_slices.htm\#ANNUAL\_LAYOUT.
+
+\bibitem{c4} American FactFinder - Search. (2010, October 5). Retrieved December 2, 2019, from \newline https://factfinder.census.gov/faces/nav/jsf/pages/searchresults.xhtml?refresh=t.
 
 \end{thebibliography}
 
