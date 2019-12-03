@@ -1,0 +1,44 @@
+---
+title: "Wisconsin Income by Zipcode"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+rm(list = ls())
+```
+
+
+```{r loadData}
+# need to change working directory based on your computer... couldnt figure out how to generalize this
+setwd("../../Manipulated Data")
+Mean_Income <- read.csv("~/GitHub/STAT333-Edugression/Manipulated Data/mean_income.csv") # mean income data
+colnames(Mean_Income)[1] <- "zipcode"
+
+Mean_Income <- Mean_Income[-which(Mean_Income$Mean.income == 'N'),]
+Mean_Income <- Mean_Income[-which(Mean_Income$Mean.income == "-"),]
+```
+
+## Data Analysis
+
+```{r plottingACT, fig.height = 20, fig.asp = 1, fig.align = "center"}
+
+# install.packages("devtools") # run these if you dont have it installed
+library(devtools)
+# install_github('arilamstein/choroplethrZip@v1.4.0')
+library(choroplethrZip)
+library(tidyverse)
+
+df <- as_tibble(
+  list(
+    region = as.character(Mean_Income$zipcode),
+    value = as.integer(as.character(Mean_Income$Mean.income))
+  )
+)
+
+zip_choropleth(df, state_zoom="wisconsin",
+               title = "2017 Mean Income for each Zipcode in the Wisconsin",
+               legend = "Mean Income (USD)",
+               num_colors = 1)
+
+```
