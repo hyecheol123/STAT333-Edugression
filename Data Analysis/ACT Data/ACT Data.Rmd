@@ -1,0 +1,52 @@
+---
+title: "ACT Data"
+author: "Carleigh Heintz"
+date: "11/28/2019"
+output: html_document
+---
+
+---
+title: "Wisconsin Income Plot"
+output: html_document
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+rm(list = ls())
+```
+
+
+```{r loadData}
+# need to change working directory based on your computer... couldnt figure out how to generalize this
+setwd("../../Manipulated Data")
+Mean_Income <- read.csv("mean_income.csv") # mean income data
+ACT_data <- read.csv("ACT Data 2017-18.csv") # ACT Data
+colnames(Mean_Income)[1] <- "zipcode"
+colnames(ACT_data)[3] <- "zipcode" #changing name ... optional
+# combining two data sets based on zipcode
+# All existing data for mean_income and ACT_Data has been merged (Containing NA)
+income.act <- merge(Mean_Income, ACT_data, by = "zipcode", all = TRUE)
+income.act$Mean.income <- as.numeric(as.character(income.act$Mean.income)) #converting from factor to numeric
+head(income.act)
+```
+
+## Data Analysis
+```{r linearRegression, fig.height = 20, fig.asp = 1, fig.align = "center"}
+lm.incomeact <- lm(income.act$ACT ~ income.act$Mean.income)
+summary(lm.incomeact)
+plot(income.act$Mean.income, income.act$ACT, xlab="Mean income", ylab="ACT Score")
+abline(lm.incomeact, col = "red")
+```
+
+```{r plottingACT, fig.height = 20, fig.asp = 1, fig.align = "center"}
+
+# install.packages("devtools") # run these if you dont have it installed
+library(devtools)
+# install_github('arilamstein/choroplethrZip@v1.4.0')
+library(choroplethrZip)
+
+df <- data.frame("region"=1:406)
+df$region = as.character(unique(ACT_data$zipcode))
+df$value = ACT_data$ACT[-which(duplicated(ACT_data$zipcode))]
+zip_choropleth(df, state_zoom="wisconsin")
+
+```
