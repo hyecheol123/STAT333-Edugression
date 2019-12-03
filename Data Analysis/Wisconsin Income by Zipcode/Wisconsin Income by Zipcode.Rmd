@@ -39,6 +39,6 @@ df <- as_tibble(
 zip_choropleth(df, state_zoom="wisconsin",
                title = "2017 Mean Income for each Zipcode in the Wisconsin",
                legend = "Mean Income (USD)",
-               num_colors = 1)
+               )
 
 ```
