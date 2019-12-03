@@ -17,7 +17,7 @@
 % on the last page of the document
 
 % The following packages can be found on http:\\www.ctan.org
-\usepackage{graphics} % for pdf, bitmapped graphics files
+\usepackage{graphicx} % for pdf, bitmapped graphics files
 %\usepackage{epsfig} % for postscript graphics files
 %\usepackage{mathptmx} % assumes new font selection scheme installed
 %\usepackage{times} % assumes new font selection scheme installed
@@ -83,8 +83,51 @@ Before going through how we collected and analyzed the datasets, note that all r
 
 \subsection{Wisconsin Income by County}
 
-First, confirm that you have the correct template for your paper size. This template has been tailored for output on the US-letter paper size. 
-It may be used for A4 paper size if the paper size setting is suitably modified.
+Before analyzing the relationship between the economic status and the educational output, we started to make a graph of annual wage per employee for each county in Wisconsin.
+This can be used gauge which citizens within the counties of the state are making more money compared to others, we are using this as a proxy variable for economic status.
+
+The data has been retrieved from Bureau of Labor Statics (BLS)'s "Quarterly Census of Employment and Wages" data, and we used year 2017's census data (n.d., [2]).
+
+\textbf{Database search criteria} has been listed below.
+
+\begin{itemize}
+
+\item All Counties in a State, One Industry
+\item Counties in Wisconsin
+\item Year: 2017
+\item Quarter: Annual Averages
+\item Ownership: Total, All Ownerships
+\item Industry: 10: Total, All Industries
+\item Do not Inculde records with suppressed employment and wages
+
+\end{itemize}
+\vspace{1\baselineskip}
+
+By selecting specific columns based on "QCEW Open Data Access: CSV Data Slices" (2016, [3]), we are able to make two plots for each "Total Annual Wage" and "Annual Wage per Employee" for each counties of the Wisconsin.
+Note that we understood the total/annual wage is synonym of total/annual income for each counties, and from now on, this paper will use the term "income" as a synonym of wage, including original meaning of the term income.
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=1.0\linewidth]{2017_Total_Annual_Wage.png}
+\end{center}
+\caption{Plot for Total Annual Wage(Income) of counties in the Wisconsin}
+\label{fig:long}
+\label{fig:onecol}
+\end{figure}
+
+Seeing the plot for Total Annual Wage(Income) of counties in the Wisconsin (Fig. 1), it can be concluded that the Madison and Milwaukee area is considered as the economic center of the Wisconsin, but as this plot indicated cumulative total wage that \textbf{all} workers in each county made, it does not consider about populations of each county, which might mis-interpret the economic status of each household.
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=1.0\linewidth]{2017_Annual_Wage_per_Employee.png}
+\end{center}
+\caption{Plot for Annual Wage(Income) per Employee of counties in the Wisconsin}
+\label{fig:long}
+\label{fig:onecol}
+\end{figure}
+
+Seeing the plot for Annual Wage(Income) per Employee of counties in the Wisconsin (Fig. 2), it can still be concluded that the Madison and Milwaukee area is considered as the economic center of the Wisconsin, but as this plot indicated average employee's income, it is more likely to represent household economic power compare to the previous plot.
+Therefore, for further analysis, we decided to use average income to represent household economic status.
 
 \subsection{Wisconsin Mean Imcome by zipcode}
 
@@ -224,6 +267,11 @@ References are important to the reader; therefore, each citation must be complet
 \begin{thebibliography}{99}
 
 \bibitem{c1} Rugaber, C. S. (2017, January 12). Pay gap between college grads and everyone else at a record. Retrieved November 27, 2019, from https://www.usatoday.com/story/money/2017/01/12/pay-gap-between-college-grads-and-everyone-else-record/96493348/.
+
+\bibitem{c2} QCEW News Releases. (n.d.). Retrieved December 2, 2019, from https://www.bls.gov/cew/.
+
+\bibitem{c3} Data Slices by Industry. (2016, June 21). Retrieved December 2, 2019, from \newline
+https://data.bls.gov/cew/doc/access/csv\_data\_slices.htm\#ANNUAL\_LAYOUT.
 
 \end{thebibliography}
 
