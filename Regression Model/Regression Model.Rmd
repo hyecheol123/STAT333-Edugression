@@ -25,11 +25,11 @@ EmployeeEducation$zip <- EmployeeEducation$zip.code
 EmployeeEducation <- EmployeeEducation[, -c(1, 2, 3, 4, 5, 6, 7)]
 MeanIncome <- read.csv("../Manipulated Data/mean_income.csv")
 MeanIncome$Mean.income <- as.numeric(as.character(MeanIncome$Mean.income))
-MeanIncome$zip <- MeanIncome$ï..zipcode
+MeanIncome$zip <- MeanIncome[, 1]
 MeanIncome <- MeanIncome[, -1]
 PrivateSchoolRatio <- read.csv("../Manipulated Data/PublicPrivateSchool.csv")
 PrivateSchoolRatio$Private.Ratio <- as.numeric(as.character(PrivateSchoolRatio$Private.Ratio))
-  PrivateSchoolRatio$zip <- PrivateSchoolRatio$Zipcode
+PrivateSchoolRatio$zip <- PrivateSchoolRatio$Zipcode
 PrivateSchoolRatio <- PrivateSchoolRatio[, -c(1, 2, 3, 4, 5, 6, 7)]
 
 ```
@@ -40,12 +40,25 @@ ACT <- merge(Demographic, ACT_Data, by = "zip", all = TRUE)
 ACT <- merge(ACT, EmployeeEducation, by = "zip", all = TRUE)
 ACT <- merge(ACT, MeanIncome, by = "zip", all = TRUE)
 ACT <- merge(ACT, PrivateSchoolRatio, by = "zip", all = TRUE)
+
+temp <- ACT$zip
+temp <- ACT$zip[which(duplicated(temp))]
+for(zip in temp) {
+  counter <- 1
+  for(dup in which(ACT$zip == zip)) {
+    ACT$zip[dup] <- paste(ACT$zip[dup], "-", counter)
+    counter <- counter + 1
+  }
+}
+rownames(ACT) <- ACT$zip
 ACT <- ACT[, -1]
+
 
 Grad <- merge(Demographic, GraduationRate, by = "zip", all = TRUE)
 Grad <- merge(Grad, EmployeeEducation, by = "zip", all = TRUE)
 Grad <- merge(Grad, MeanIncome, by = "zip", all = TRUE)
 Grad <- merge(Grad, PrivateSchoolRatio, by = "zip", all = TRUE)
+rownames(Grad) <- Grad$zip
 Grad <- Grad[, -1]
 
 ```
