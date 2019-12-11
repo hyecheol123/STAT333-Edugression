@@ -8,6 +8,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```{r loadData}
+library(olsrr)
 ACT_Data <- read.csv("../Manipulated Data/ACT Data 2017-18.csv")
 ACT_Data <- ACT_Data[, -1]
 ACT_Data$zip <- ACT_Data$Zipcode
@@ -41,6 +42,13 @@ ACT <- merge(ACT, EmployeeEducation, by = "zip", all = TRUE)
 ACT <- merge(ACT, MeanIncome, by = "zip", all = TRUE)
 ACT <- merge(ACT, PrivateSchoolRatio, by = "zip", all = TRUE)
 
+
+ACTWithoutDemographic <- merge(ACT, EmployeeEducation, by = "zip", all = TRUE)
+ACTWithoutDemographic <- merge(ACT, MeanIncome, by = "zip", all = TRUE)
+ACTWithoutDemographic <- merge(ACT, PrivateSchoolRatio, by = "zip", all = TRUE)
+ 
+
+
 temp <- ACT$zip
 temp <- ACT$zip[which(duplicated(temp))]
 for(zip in temp) {
@@ -66,10 +74,27 @@ Grad <- Grad[, -1]
 ```{r linearRegression}
 lm.fit.ACT <- lm(ACT ~ ., data = ACT)
 summary(lm.fit.ACT)
-plot(lm.fit.ACT)
+##plot(lm.fit.ACT)
+#ols_coll_diag(lm.fit.ACT)
+ols_vif_tol(lm.fit.ACT)
+ols_eigen_cindex(lm.fit.ACT)
+#ols_correlations(lm.fit.ACT)
+#ols_regress(lm.fit.ACT)
+#ols_plot_diagnostics(lm.fit.ACT)
+lm.fit.ACT.temp <- lm(ACT ~ ACT + Assoc.Ratio + Bachelor.Ratio + Master.Ratio + Prof.Degree.Ratio + 
+                        Doctor.Ratio + Mean.income + Private.Ratio, data = ACT)
+summary(lm.fit.ACT.temp)
+anova(lm.fit.ACT.temp, lm.fit.ACT)
+
 
 lm.fit.Grad <- lm(GraduationRate ~ ., data = Grad)
+
+lm.fit.Gradtemp <- lm(GraduationRate ~ GraduationRate + Assoc.Ratio + Bachelor.Ratio + Master.Ratio + Prof.Degree.Ratio + Doctor.Ratio + Mean.income + Private.Ratio, data = Grad)
+#ols_vif_tol(lm.fit.Grad)
 summary(lm.fit.Grad)
-##plot(lm.fit.Grad)
+summary(lm.fit.Gradtemp)
+
+anova(lm.fit.Gradtemp, lm.fit.Grad)
+#plot(lm.fit.Grad)
 ```
 
