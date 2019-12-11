@@ -25,12 +25,13 @@ EmployeeEducation$zip <- EmployeeEducation$zip.code
 EmployeeEducation <- EmployeeEducation[, -c(1, 2, 3, 4, 5, 6, 7)]
 MeanIncome <- read.csv("../Manipulated Data/mean_income.csv")
 MeanIncome$Mean.income <- as.numeric(as.character(MeanIncome$Mean.income))
-MeanIncome$zip <- MeanIncome$Ã¯..zipcode
+MeanIncome$zip <- MeanIncome$ï..zipcode
 MeanIncome <- MeanIncome[, -1]
 PrivateSchoolRatio <- read.csv("../Manipulated Data/PublicPrivateSchool.csv")
 PrivateSchoolRatio$Private.Ratio <- as.numeric(as.character(PrivateSchoolRatio$Private.Ratio))
-PrivateSchoolRatio$zip <- PrivateSchoolRatio$Zipcode
+  PrivateSchoolRatio$zip <- PrivateSchoolRatio$Zipcode
 PrivateSchoolRatio <- PrivateSchoolRatio[, -c(1, 2, 3, 4, 5, 6, 7)]
+
 ```
 
 ```{r mergeDatasets}
@@ -52,8 +53,10 @@ Grad <- Grad[, -1]
 ```{r linearRegression}
 lm.fit.ACT <- lm(ACT ~ ., data = ACT)
 summary(lm.fit.ACT)
+plot(lm.fit.ACT)
 
 lm.fit.Grad <- lm(GraduationRate ~ ., data = Grad)
 summary(lm.fit.Grad)
+##plot(lm.fit.Grad)
 ```
 
