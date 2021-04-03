@@ -1,4 +1,4 @@
-*.cls linguist-documentation
+**.cls linguist-documentation
 *.html linguist-documentation
 *.Rmd linguist-detectable=true
 *.Rmd linguist-language=RMarkdown
