@@ -1,4 +1,5 @@
-report/ieeeconf.cls linguist-vendored=true
+report/ieeeconf.cls linguist-detectable=false
 *.html linguist-documentation
-*.Rmd linguist-language=R
+*.Rmd linguist-detectable=true
+*.Rmd linguist-language=RMarkdown
 *.R linguist-language=R
