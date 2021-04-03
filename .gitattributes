@@ -1,0 +1,4 @@
+report/ieeeconf.cls linguist-vendored=true
+*.html linguist-documentation
+*.Rmd linguist-language=R
+*.R linguist-language=R
